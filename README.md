@@ -1,17 +1,23 @@
-# Component Name
-Write the component overview here
+# React Native Dialog
+Component of modified modal, add overlay before the actual content
 
 
 ## Usage
 
 ```jsx
-    <ComponentName
-        caption="Submit"
-        onPress={somefunction}
-        bold
-        italic
-        color="#00f"
-    />
+    <Dialog
+        containerStyle={styles.container}
+        overlayStyle={styles.overlay}
+        backgroundColor={styles.overlay}
+        overlayColor="white"
+        borderRadius={3}
+        width={50}
+        height={150}
+        onOverlayPressed={() =>{}}
+        ...modalProps
+    >
+        {children}
+    </Dialog>
 ```
 
 ## Properties
