@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Modal } from 'react-native';
+import {
+  View, Modal, Dimensions, TouchableOpacity,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
+const widthDevice = Dimensions.get('window').width;
+const heightDevice = Dimensions.get('window').height;
+
 const styles = {
-  innerModalContainer: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
   modalContainer: {
-    backgroundColor: 'white',
+    justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 15,
     borderRadius: 6,
@@ -19,7 +19,6 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#00000080',
   },
 };
 
@@ -41,14 +40,19 @@ const Dialog = ({
     onRequestClose={onOverlayPressed}
     {...props}
   >
-    <View style={[styles.overlayModal, overlayColor, overlayStyle]}>
+    <TouchableOpacity
+      style={[styles.overlayModal, { backgroundColor: overlayColor }, overlayStyle]}
+      onPress={onOverlayPressed}
+    >
       <View style={[
-        styles.modalContainer, width, height, borderRadius, backgroundColor, containerStyle,
+        styles.modalContainer, {
+          width, height, borderRadius, backgroundColor,
+        }, containerStyle,
       ]}
       >
         {children}
       </View>
-    </View>
+    </TouchableOpacity>
   </Modal>
 );
 
@@ -67,14 +71,8 @@ Dialog.propTypes = {
   backgroundColor: PropTypes.string,
   overlayColor: PropTypes.string,
   borderRadius: PropTypes.number,
-  width: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
-  height: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  width: PropTypes.number,
+  height: PropTypes.number,
   onOverlayPressed: PropTypes.func,
 };
 
@@ -84,7 +82,7 @@ Dialog.defaultProps = {
   backgroundColor: '#FFFFFF',
   overlayColor: '#00000080',
   borderRadius: 10,
-  width: '93%',
-  height: '70%',
+  width: widthDevice * 0.7,
+  height: heightDevice * 0.6,
   onOverlayPressed: () => {},
 };

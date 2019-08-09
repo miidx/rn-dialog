@@ -1,3 +1,3 @@
-import CustomComponent from './src/custom-component';
+import Dialog from './src/dialog';
 
-export default CustomComponent;
+export default Dialog;
